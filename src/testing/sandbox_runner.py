@@ -15,7 +15,7 @@ import re
 import tempfile
 from pathlib import Path
 
-from testing.models import Confidence, FrameworkType, TestCase, TestResult, TestStatus
+from testing.models import FrameworkType, TestCase, TestResult, TestStatus
 
 logger = logging.getLogger(__name__)
 
@@ -90,7 +90,9 @@ async def _run_pytest(cases: list[TestCase], timeout: int) -> list[TestResult]:
 
         # Run pytest across all temp files
         cmd = [
-            "python", "-m", "pytest",
+            "python",
+            "-m",
+            "pytest",
             "--tb=short",
             "--no-header",
             "-q",
@@ -99,6 +101,7 @@ async def _run_pytest(cases: list[TestCase], timeout: int) -> list[TestResult]:
 
         try:
             import time
+
             start = time.monotonic()
             proc = await asyncio.create_subprocess_exec(
                 *cmd,
@@ -107,9 +110,7 @@ async def _run_pytest(cases: list[TestCase], timeout: int) -> list[TestResult]:
                 cwd=tmpdir,
             )
             try:
-                raw_out, raw_err = await asyncio.wait_for(
-                    proc.communicate(), timeout=timeout
-                )
+                raw_out, raw_err = await asyncio.wait_for(proc.communicate(), timeout=timeout)
                 elapsed_ms = (time.monotonic() - start) * 1000
                 timed_out = False
             except TimeoutError:
@@ -155,7 +156,7 @@ def _parse_pytest_status(stdout: str, filename: str, timed_out: bool) -> TestSta
     if timed_out:
         return TestStatus.TIMEOUT
     # Look for the file name in the output
-    if f"PASSED {filename}" in stdout or f"passed" in stdout and "failed" not in stdout:
+    if f"PASSED {filename}" in stdout or "passed" in stdout and "failed" not in stdout:
         return TestStatus.PASS
     if f"FAILED {filename}" in stdout or "failed" in stdout:
         return TestStatus.FAIL
@@ -205,6 +206,7 @@ async def _run_jest(
 
         try:
             import time
+
             start = time.monotonic()
             proc = await asyncio.create_subprocess_exec(
                 *cmd,
@@ -213,9 +215,7 @@ async def _run_jest(
                 cwd=tmpdir,
             )
             try:
-                raw_out, raw_err = await asyncio.wait_for(
-                    proc.communicate(), timeout=timeout
-                )
+                raw_out, raw_err = await asyncio.wait_for(proc.communicate(), timeout=timeout)
                 elapsed_ms = (time.monotonic() - start) * 1000
                 timed_out = False
             except TimeoutError:

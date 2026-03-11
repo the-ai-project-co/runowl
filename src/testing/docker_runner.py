@@ -15,9 +15,9 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import os
 import tempfile
 from pathlib import Path
+from typing import Any
 
 from testing.models import TestCase, TestResult, TestStatus
 
@@ -71,6 +71,8 @@ async def run_e2e_tests(
 
         # Run inside Docker
         try:
+            import docker  # noqa: PLC0415
+
             client = docker.from_env()
             stdout_log, stderr_log, exit_code = await _run_container(
                 client=client,
@@ -113,18 +115,16 @@ async def run_e2e_tests(
 
 
 async def _run_container(
-    client: object,
+    client: Any,
     image: str,
     host_dir: str,
     timeout: int,
 ) -> tuple[str, str, int]:
     """Pull image (if needed) and run the Playwright test suite inside it."""
-    import docker  # type: ignore[import-untyped]
-
     loop = asyncio.get_event_loop()
 
     def _sync_run() -> tuple[str, str, int]:
-        c = client.containers.run(  # type: ignore[union-attr]
+        c = client.containers.run(
             image=image,
             command=f"npx playwright test --output={_CONTAINER_WORK_DIR}/videos",
             volumes={host_dir: {"bind": _CONTAINER_WORK_DIR, "mode": "rw"}},
@@ -141,7 +141,7 @@ async def _run_container(
         if isinstance(c, bytes):
             return c.decode("utf-8", errors="replace"), "", 0
         # If we get a Container object (should not happen with remove=True + no detach)
-        logs = c.logs(stdout=True, stderr=True)  # type: ignore[union-attr]
+        logs = c.logs(stdout=True, stderr=True)
         return logs.decode("utf-8", errors="replace"), "", 0
 
     try:

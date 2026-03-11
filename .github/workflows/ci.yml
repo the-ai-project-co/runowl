@@ -36,7 +36,7 @@ jobs:
         run: uv run black --check .
 
       - name: Type check (mypy)
-        run: uv run mypy --package architecture --package config --package freemium --package github --package qa --package reasoning --package review --package runowl --package sandbox --package security --package webhook
+        run: uv run mypy --package architecture --package config --package freemium --package github --package qa --package reasoning --package review --package runowl --package sandbox --package security --package testing --package webhook
 
       - name: Run tests
         run: uv run pytest --tb=short -q

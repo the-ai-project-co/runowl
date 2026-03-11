@@ -1,5 +1,7 @@
 """Tests for SOLID / architecture checks (paid tier)."""
 
+from architecture.models import ArchCheckType
+
 from architecture.checks import (
     check_deep_nesting,
     check_dependency_inversion,
@@ -10,7 +12,6 @@ from architecture.checks import (
     check_open_closed,
     check_single_responsibility,
 )
-from architecture.models import ArchCheckType
 from architecture.solid import run_solid_scan
 from github.models import DiffHunk, FileDiff
 

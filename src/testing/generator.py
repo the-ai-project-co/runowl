@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import logging
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import anthropic
 from anthropic.types import MessageParam, TextBlock, ToolUseBlock
@@ -47,7 +47,7 @@ _COVERS_RE = re.compile(r"#\s*covers:\s*(\S+):(\d+)", re.IGNORECASE)
 # Tool definitions for Claude
 # ---------------------------------------------------------------------------
 
-_TOOLS: list[dict] = [
+_TOOLS: list[dict[str, object]] = [
     {
         "name": "FETCH_FILE",
         "description": "Fetch the contents of a file in the repository.",
@@ -114,7 +114,7 @@ class TestGenerationAgent:
         """Run the test generation agent for a PR and return a TestSuite."""
 
         # Fetch diffs and build context
-        diffs = await self._github.get_pr_files(ref)
+        diffs = await self._github.get_pr_files(ref)  # type: ignore[attr-defined]
         diff_context = build_diff_context(metadata, diffs)
 
         # Detect framework and find existing test paths
@@ -193,7 +193,7 @@ class TestGenerationAgent:
                         }
                     )
 
-                messages.append({"role": "user", "content": tool_results})
+                messages.append({"role": "user", "content": tool_results})  # type: ignore[typeddict-item]
                 continue
 
             # Any other stop reason (max_tokens etc) — capture what we have
@@ -238,7 +238,10 @@ class TestGenerationAgent:
                 results = await self._github.search_code(ref, args["query"])
                 if not results:
                     return "No results found."
-                lines = [f"{r.path}:{r.line_number}  {r.fragment}" for r in results[:10]]
+                lines = [
+                    f"{r.path}:{getattr(r, 'line_number', '')}  {getattr(r, 'fragment', '')}"
+                    for r in results[:10]
+                ]
                 return "\n".join(lines)
 
         except Exception as exc:
@@ -314,7 +317,11 @@ def _extract_description(code: str) -> str:
     for line in lines[:10]:
         stripped = line.strip()
         if stripped.startswith('"""') or stripped.startswith("'''"):
-            return stripped.strip('"\' ')
-        if stripped.startswith("#") and not stripped.startswith("# confidence") and not stripped.startswith("# covers"):
+            return stripped.strip("\"' ")
+        if (
+            stripped.startswith("#")
+            and not stripped.startswith("# confidence")
+            and not stripped.startswith("# covers")
+        ):
             return stripped.lstrip("# ").strip()
     return ""

@@ -18,7 +18,6 @@ from github.client import GitHubClient
 from github.models import PRRef
 from testing.executor import execute_suite
 from testing.generator import TestGenerationAgent
-from testing.models import TestSuite
 from testing.results import format_results_json, load_suite
 
 logger = logging.getLogger(__name__)
@@ -120,7 +119,7 @@ async def run_tests(req: TestRequest, background_tasks: BackgroundTasks) -> Test
 
 
 @router.get("/{suite_id}")
-async def get_results(suite_id: str) -> dict:
+async def get_results(suite_id: str) -> dict[str, object]:
     """Retrieve results for a completed test suite."""
     suite = load_suite(suite_id)
     if not suite:

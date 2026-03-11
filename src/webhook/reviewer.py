@@ -77,10 +77,16 @@ async def run_review_job(event: PullRequestEvent, settings: Settings) -> None:
                         await gh.post_pr_comment(ref, test_comment)
                         logger.info(
                             "Posted test results (%d/%d passed) on %s/%s#%d",
-                            suite.passed, suite.total, owner, repo, pr_number,
+                            suite.passed,
+                            suite.total,
+                            owner,
+                            repo,
+                            pr_number,
                         )
                 except Exception:
-                    logger.exception("Test generation/execution failed for %s/%s#%d", owner, repo, pr_number)
+                    logger.exception(
+                        "Test generation/execution failed for %s/%s#%d", owner, repo, pr_number
+                    )
 
         except Exception:
             logger.exception("Unhandled error in review job for %s/%s#%d", owner, repo, pr_number)

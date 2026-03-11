@@ -20,7 +20,7 @@ import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from testing.models import TestResult, TestSuite
+from testing.models import TestSuite
 
 logger = logging.getLogger(__name__)
 
@@ -78,7 +78,6 @@ def attach_recordings(suite: TestSuite, tmp_dir: str) -> None:
     attach them to the corresponding TestResult objects in the suite.
     """
     tmp = Path(tmp_dir)
-    videos_dir = tmp / "videos"
 
     for result in suite.results:
         if result.video_path:
@@ -94,7 +93,11 @@ def attach_recordings(suite: TestSuite, tmp_dir: str) -> None:
             result.replay_path = stored_replay
 
         # Screenshots (on failure)
-        screenshots = list((tmp / "screenshots").rglob(f"*{result.test_id}*")) if (tmp / "screenshots").exists() else []
+        screenshots = (
+            list((tmp / "screenshots").rglob(f"*{result.test_id}*"))
+            if (tmp / "screenshots").exists()
+            else []
+        )
         if screenshots:
             dest_dir = recording_dir(suite.id)
             stored_shots: list[str] = []
