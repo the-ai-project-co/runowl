@@ -1,0 +1,49 @@
+# OpenMemory / IDE
+.cursor/
+.claude/
+openmemory.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.env
+*.egg-info/
+dist/
+build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# uv
+uv.lock
+
+# RunOwl runtime traces
+.runowl/
+
+# Node / CLI
+cli/node_modules/
+cli/dist/
+cli/*.js
+cli/*.d.ts
+
+# Website
+website/node_modules/
+website/.svelte-kit/
+website/build/
+website/.vercel/
+website/.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets — never commit
+.env
+*.pem
+*.key

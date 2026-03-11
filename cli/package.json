@@ -1,0 +1,31 @@
+{
+  "name": "runowl",
+  "version": "0.1.0",
+  "description": "AI agent that reviews PRs, generates tests, and catches bugs before merge",
+  "keywords": ["ai", "code-review", "github", "pr", "security", "solid"],
+  "homepage": "https://runowl.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/the-ai-project-co/RunOwl.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "runowl": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
