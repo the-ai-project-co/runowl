@@ -10,6 +10,9 @@ from github.models import PRRef
 from reasoning.engine import ReasoningEngine
 from review.agent import ReviewAgent
 from review.formatter import format_review_markdown
+from testing.executor import execute_suite
+from testing.generator import TestGenerationAgent
+from testing.results import format_results_markdown
 from webhook.check_run import finish_check_run, start_check_run
 from webhook.models import PullRequestEvent
 
@@ -61,6 +64,23 @@ async def run_review_job(event: PullRequestEvent, settings: Settings) -> None:
 
             # 4. Finish Check Run
             await finish_check_run(gh, owner, repo, check_run_id, result)
+
+            # 5. Generate + run tests (if Anthropic key configured)
+            if settings.anthropic_api_key:
+                try:
+                    metadata = await gh.get_pr_metadata(ref)
+                    test_agent = TestGenerationAgent(gh, settings.anthropic_api_key)
+                    gen = await test_agent.generate(ref, metadata)
+                    if gen.success:
+                        suite = await execute_suite(gen.suite, metadata.body or "")
+                        test_comment = format_results_markdown(suite)
+                        await gh.post_pr_comment(ref, test_comment)
+                        logger.info(
+                            "Posted test results (%d/%d passed) on %s/%s#%d",
+                            suite.passed, suite.total, owner, repo, pr_number,
+                        )
+                except Exception:
+                    logger.exception("Test generation/execution failed for %s/%s#%d", owner, repo, pr_number)
 
         except Exception:
             logger.exception("Unhandled error in review job for %s/%s#%d", owner, repo, pr_number)

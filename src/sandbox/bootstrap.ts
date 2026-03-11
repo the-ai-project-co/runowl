@@ -9,7 +9,7 @@
  * arbitrary code outside the provided agent script.
  */
 
-const ALLOWED_TOOLS = new Set(["SEARCH_CODE", "FETCH_FILE", "LIST_DIR"]);
+const ALLOWED_TOOLS = new Set(["SEARCH_CODE", "FETCH_FILE", "LIST_DIR", "RUN_TESTS"]);
 
 // Context injected by the Python runner
 const contextRaw = Deno.env.get("RUNOWL_CONTEXT") ?? "{}";
@@ -52,6 +52,9 @@ function callTool(name: string, args: Record<string, unknown>): unknown {
       case "LIST_DIR":
         result.result = { status: "dispatched", path: args["path"] };
         break;
+      case "RUN_TESTS":
+        result.result = { status: "dispatched", test_code: args["test_code"], framework: args["framework"] };
+        break;
     }
   } catch (err) {
     result.error = String(err);
@@ -69,6 +72,7 @@ const sandboxGlobals = {
   SEARCH_CODE: (query: string) => callTool("SEARCH_CODE", { query }),
   FETCH_FILE: (path: string) => callTool("FETCH_FILE", { path }),
   LIST_DIR: (path: string) => callTool("LIST_DIR", { path }),
+  RUN_TESTS: (test_code: string, framework: string) => callTool("RUN_TESTS", { test_code, framework }),
   console,
 };
 

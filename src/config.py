@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     # Gemini
     gemini_api_key: str = Field(..., description="Google Gemini API key")
 
+    # Anthropic (test generation agent)
+    anthropic_api_key: str | None = Field(None, description="Anthropic API key for test generation")
+
     # GitHub
     github_token: str | None = Field(None, description="GitHub personal access token")
     github_app_id: str | None = Field(None)

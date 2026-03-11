@@ -33,6 +33,8 @@ dependencies = [
     "typer>=0.15.0",
     "tenacity>=9.0.0",
     "cachetools>=5.5.0",
+    "anthropic>=0.40.0",
+    "docker>=7.0.0",
 ]
 
 [project.optional-dependencies]

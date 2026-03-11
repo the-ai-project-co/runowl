@@ -18,6 +18,8 @@ export interface ParsedArgs {
   quiet: boolean;
   submit: boolean;
   model?: string;
+  test: boolean;       // generate + run tests after review
+  testOnly: boolean;   // generate + run tests without review
   version: boolean;
   help: boolean;
 }
@@ -28,6 +30,8 @@ export function parseArgs(argv: string[]): ParsedArgs {
     output: "text",
     quiet: false,
     submit: false,
+    test: false,
+    testOnly: false,
     version: false,
     help: false,
   };
@@ -84,6 +88,12 @@ export function parseArgs(argv: string[]): ParsedArgs {
       case "--model":
       case "-m":
         result.model = next();
+        break;
+      case "--test":
+        result.test = true;
+        break;
+      case "--test-only":
+        result.testOnly = true;
         break;
       case "--version":
       case "-V":

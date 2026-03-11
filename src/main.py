@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from __init__ import __version__
 from freemium.router import router as license_router
+from testing.router import router as testing_router
 from webhook.router import router as webhook_router
 
 app = FastAPI(
@@ -22,6 +23,7 @@ app.add_middleware(
 
 app.include_router(webhook_router)
 app.include_router(license_router)
+app.include_router(testing_router)
 
 
 @app.get("/health")
