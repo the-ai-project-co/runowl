@@ -28,13 +28,6 @@ cli/dist/
 cli/*.js
 cli/*.d.ts
 
-# Website
-website/node_modules/
-website/.svelte-kit/
-website/build/
-website/.vercel/
-website/.vscode/
-
 # OS
 .DS_Store
 Thumbs.db
