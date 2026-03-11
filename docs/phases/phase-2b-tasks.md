@@ -83,36 +83,7 @@
 - [ ] Build keyboard shortcuts for common actions
 - [ ] Write tests for layout behavior
 
-## 8. Team Management
-
-- [ ] Build organization/workspace creation flow
-- [ ] Implement workspace settings page
-- [ ] Build team member invitation system (email invites)
-- [ ] Implement role-based access control:
-  - [ ] **Admin** — full access, manage team, billing
-  - [ ] **Reviewer** — view PRs, run reviews, manage tests
-  - [ ] **Viewer** — read-only access to reviews and results
-- [ ] Build team member list with role management
-- [ ] Implement role-based UI visibility (hide admin features from viewers)
-- [ ] Build workspace switching for users in multiple orgs
-- [ ] Write tests for team management
-
-## 9. Test Suite Management
-
-- [ ] Build test suite list view
-- [ ] Implement test suite creation (name, description, linked repo)
-- [ ] Build test case editor (view/edit generated tests)
-- [ ] Implement version control for test suites:
-  - [ ] Draft state (editable, not active)
-  - [ ] Published state (active, runs on PRs)
-  - [ ] Version history (list of published versions)
-  - [ ] Rollback to previous version
-- [ ] Build test suite organization (by project, feature, or tag)
-- [ ] Implement test execution history per suite
-- [ ] Show pass/fail trends over time per suite
-- [ ] Write tests for suite management
-
-## 10. Video & Replay Viewer (UI)
+## 8. Video & Replay Viewer (UI)
 
 - [ ] Build video player component for test failure recordings
 - [ ] Implement session replay player with timeline
@@ -122,7 +93,7 @@
 - [ ] Link replay to specific test assertion that failed
 - [ ] Write tests for video/replay viewer
 
-## 11. API Layer (Backend for Frontend)
+## 9. API Layer (Backend for Frontend)
 
 - [ ] Design API routes for web UI
 - [ ] `POST /api/pr/load` — load PR metadata and files
@@ -138,12 +109,3 @@
 - [ ] Implement request validation and error handling
 - [ ] Write API tests
 
-## 12. Billing & Tier Enforcement (Web)
-
-- [ ] Build billing page (current plan, usage, upgrade)
-- [ ] Integrate payment provider (Stripe)
-- [ ] Implement tier enforcement in web UI (show/hide paid features)
-- [ ] Build upgrade prompts when free users access paid features
-- [ ] Implement usage tracking (reviews run, tests executed)
-- [ ] Build invoice history page
-- [ ] Write tests for billing flows

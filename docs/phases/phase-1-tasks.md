@@ -86,39 +86,7 @@
 - [x] Unpinned dependency versions
 - [x] Write tests for each detection
 
-## 9. Deep Security Analysis (Paid)
-
-- [x] Full OWASP Top 10 checklist implementation
-  - [x] Injection (SQL, NoSQL, command, GraphQL)
-  - [x] Broken authentication
-  - [x] Sensitive data exposure
-  - [x] XXE
-  - [x] Broken access control
-  - [x] Security misconfiguration
-  - [x] XSS (stored, reflected, DOM)
-  - [x] Insecure deserialization
-  - [x] Using components with known vulnerabilities
-  - [x] Insufficient logging
-- [x] JWT & token security (algorithm confusion, weak secrets, missing expiry)
-- [x] Cryptography checks (weak algorithms, hardcoded IVs/salts)
-- [x] Race condition detection (unsynchronized shared state, TOCTOU)
-- [x] Supply chain analysis (dependency confusion, untrusted imports)
-- [x] CORS & security header checks (CSP, X-Frame-Options)
-- [x] Runtime risk detection (unbounded loops, missing timeouts, resource exhaustion)
-- [x] Data integrity checks (missing transactions, non-idempotent operations)
-- [x] Write tests for each category
-
-## 10. SOLID / Architecture Analysis (Paid)
-
-- [x] Single Responsibility Principle detection (god objects, mixed concerns)
-- [x] Open/Closed Principle detection (excessive switch/if blocks, no extension points)
-- [x] Liskov Substitution detection (subclass type checks, no-op overrides)
-- [x] Interface Segregation detection (fat interfaces, stub implementations)
-- [x] Dependency Inversion detection (hardcoded implementations, no abstractions)
-- [x] Code smell detection (long methods, deep nesting, feature envy)
-- [x] Write tests for architecture analysis
-
-## 11. CLI Tool (`npx runowl`)
+## 9. CLI Tool (`npx runowl`)
 
 - [x] Set up npm package structure
 - [x] Build TypeScript CLI entry point
@@ -145,7 +113,7 @@
 - [x] Write tests for CLI commands
 - [x] Publish to npm registry
 
-## 12. GitHub PR Integration
+## 10. GitHub PR Integration
 
 - [x] Build webhook receiver for PR events (opened, synchronize, reopened)
 - [x] Auto-trigger review on PR open
@@ -155,7 +123,7 @@
 - [x] Build GitHub App configuration flow
 - [x] Write tests for webhook handling
 
-## 13. Freemium Gate
+## 11. Freemium Gate
 
 - [x] Define feature flags for free vs paid
 - [x] Implement tier detection (API key / license check)
@@ -165,7 +133,7 @@
 - [x] Build license validation endpoint
 - [x] Write tests for gating logic
 
-## 14. Documentation
+## 12. Documentation
 
 - [x] Write README (project description, quick start, features, comparison table)
 - [x] Write INSTALLATION.md (prerequisites, setup steps, environment config)
@@ -174,7 +142,7 @@
 - [x] Add inline code comments for complex logic
 - [x] Create `.env.example` with all configuration options documented
 
-## 15. Launch Prep
+## 13. Launch Prep
 
 - [x] Set up runowl.ai website (or similar domain)
 - [x] Create GitHub organization
