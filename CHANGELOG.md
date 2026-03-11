@@ -11,6 +11,31 @@ RunOwl uses [semantic versioning](https://semver.org/).
 
 ---
 
+## [0.2.0] — 2026-03-11
+
+### Changed
+
+**Monorepo workspace restructure**
+- Split into three independent repositories inside the `RunOwl/` workspace:
+  - `runowl/` — public open-source core (this repo, MIT license)
+  - `runowl-paid/` — private paid extensions (Team / Business / Enterprise, proprietary)
+  - `runowl-website/` — SvelteKit marketing site and docs
+- Paid modules (`src/security/deep_checks.py`, `src/architecture/solid.py`, `src/architecture/checks.py`) replaced with `NotImplementedError` stubs in this repo; full implementations live in `runowl-paid`
+- `.gitignore` updated to match new repo boundaries
+
+**Docs restructure (Option B segregation)**
+- `docs/phases/` — free-only task lists retained here (Phases 1–3 free portions)
+- Paid phase content moved to `runowl-paid/docs/phases/`:
+  - Phase 1: Deep Security + SOLID tasks → `phase-1-paid-tasks.md`
+  - Phase 2b: Team Management, Test Suite Management, Billing → `phase-2b-paid-tasks.md`
+  - Phase 3: Regression Detection → `phase-3-paid-tasks.md`
+  - Phase 4 (Integrations & Scale) moved entirely to `runowl-paid`
+- `docs/milestones.md` — stripped to free-tier phases only; full version in `runowl-paid`
+- Brand strategy, product roadmap, and Phase 5 tasks moved to `runowl-paid/docs/`
+- `docs/launch/` — launch content (blog post, Product Hunt listing, launch posts)
+
+---
+
 ## [0.1.0] — 2026-03-11
 
 Initial release of RunOwl — AI-powered PR code review agent.

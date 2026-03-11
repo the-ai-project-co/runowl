@@ -1,6 +1,10 @@
-# RunOwl — Milestones Document
+# RunOwl — Milestones (Free Tier)
 
-## Phase 1 — MVP: AI Code Review
+> Paid-tier milestones (Deep Security, SOLID, Team Management, Regression Detection, Integrations & Scale, Enterprise) are tracked in `runowl-paid/docs/milestones.md`.
+
+---
+
+## Phase 1 — MVP: AI Code Review ✅
 
 ### Milestone 1.1: Core Review Engine
 - [x] Set up Python/FastAPI project structure
@@ -26,37 +30,21 @@
 - [x] Obvious injection pattern detection
 - [x] Missing auth checks on endpoints
 
-### Milestone 1.5: Deep Security Analysis (Paid)
-- [x] Full OWASP checklist implementation
-- [x] JWT & token security analysis
-- [x] Cryptography weakness detection
-- [x] Race condition detection
-- [x] Supply chain / dependency analysis
-- [x] CORS & security header checks
-
-### Milestone 1.6: SOLID / Architecture Analysis (Paid)
-- [x] Single Responsibility Principle checks
-- [x] Open/Closed Principle checks
-- [x] Liskov Substitution checks
-- [x] Interface Segregation checks
-- [x] Dependency Inversion checks
-- [x] God object / code smell detection
-
-### Milestone 1.7: CLI Tool
+### Milestone 1.5: CLI Tool
 - [x] Build `npx runowl` CLI package
 - [x] Implement `review` command with --url and --question flags
-- [x] Implement --expert flag for deep analysis
+- [x] Implement --expert flag (activates paid deep analysis)
 - [x] Support text, markdown, and JSON output formats
 - [x] Implement --submit flag to post results as PR comments
 - [x] Implement --quiet flag for CI/CD usage
 
-### Milestone 1.8: GitHub Integration
+### Milestone 1.6: GitHub Integration
 - [x] PR event webhook listener
 - [x] Auto-trigger review on PR open
 - [x] Post findings as PR comments with severity badges
 - [x] Support both public and private repositories
 
-### Milestone 1.9: Freemium Gate
+### Milestone 1.7: Freemium Gate
 - [x] Implement license/tier detection
 - [x] Gate deep security and SOLID features behind paid tier
 - [x] Build upgrade prompts for free users hitting paid features
@@ -87,11 +75,11 @@
 - [ ] Implement video recording of test execution
 - [ ] Build session replay from recorded events
 - [ ] Link video timestamps to specific test assertions
-- [ ] Store and serve recordings (cloud tier)
+- [ ] Store and serve recordings
 
 ---
 
-## Phase 2b — Platform & Management
+## Phase 2b — Platform & Management (Free Portions)
 
 ### Milestone 2b.1: Web UI
 - [ ] Set up Next.js project
@@ -101,22 +89,11 @@
 - [ ] Build real-time streaming of review results
 - [ ] Implement citation click-to-navigate
 
-### Milestone 2b.2: Team Management
-- [ ] User authentication and accounts
-- [ ] Organization/workspace creation
-- [ ] Role-based access control (admin, reviewer, viewer)
-- [ ] Team member invitation flow
-- [ ] Per-team settings and preferences
-
-### Milestone 2b.3: Test Suite Management
-- [ ] Test suite CRUD operations
-- [ ] Version control for test suites (drafts, publish, rollback)
-- [ ] Test suite organization by project/feature
-- [ ] Test history and execution logs
+> Team Management, Test Suite Management, and Billing are tracked in `runowl-paid/docs/phases/phase-2b-paid-tasks.md`.
 
 ---
 
-## Phase 3 — Intelligence & Ecosystem
+## Phase 3 — Intelligence & Ecosystem (Free Portions)
 
 ### Milestone 3.1: Agent/Skill Integration
 - [ ] Build SKILL.md definition for RunOwl
@@ -141,41 +118,5 @@
 - [ ] Generate 4–5 contextual next questions per review
 - [ ] Use lightweight sub-model for speed
 
-### Milestone 3.5: Regression Detection
-- [ ] Track findings across PRs over time
-- [ ] Detect recurring patterns and repeat bugs
-- [ ] Build regression trend dashboard
-- [ ] Alert on regression spikes
-
----
-
-## Phase 4 — Integrations & Scale
-
-### Milestone 4.1: Communication Integrations
-- [ ] Slack notification system (review complete, bugs found, tests failed)
-- [ ] Linear issue creation from findings (with severity mapping)
-- [ ] Jira issue creation from findings
-
-### Milestone 4.2: VCS Platform Expansion
-- [ ] GitLab MR support (webhook + API)
-- [ ] Bitbucket PR support (webhook + API)
-- [ ] Unified VCS abstraction layer
-
-### Milestone 4.3: Multi-Model Support
-- [ ] Abstract AI provider interface
-- [ ] Add Claude integration
-- [ ] Add GPT integration
-- [ ] Model selection per workspace/review
-
-### Milestone 4.4: Custom Rules & Analytics
-- [ ] Custom checklist builder UI
-- [ ] Rule engine for team-defined checks
-- [ ] PR analytics dashboard (merge velocity, bug trends, quality score)
-- [ ] Historical data aggregation
-
-### Milestone 4.5: API & Monorepo
-- [ ] Public REST API design and documentation
-- [ ] API key management
-- [ ] Rate limiting and usage tracking
-- [ ] Monorepo detection and scoped reviews per package/service
-
+> Regression Detection is tracked in `runowl-paid/docs/phases/phase-3-paid-tasks.md`.
+> Integrations & Scale (Phase 4) and Enterprise (Phase 5) are tracked entirely in `runowl-paid/docs/`.
