@@ -15,9 +15,7 @@ class TestTestSuiteAggregation:
     def _make_suite(self, statuses: list[TestStatus]) -> TestSuite:
         suite = TestSuite(pr_ref="owner/repo#1")
         for i, status in enumerate(statuses):
-            suite.results.append(
-                TestResult(test_id=str(i), test_name=f"test_{i}", status=status)
-            )
+            suite.results.append(TestResult(test_id=str(i), test_name=f"test_{i}", status=status))
         return suite
 
     def test_all_passed(self) -> None:
@@ -36,7 +34,13 @@ class TestTestSuiteAggregation:
 
     def test_counts(self) -> None:
         suite = self._make_suite(
-            [TestStatus.PASS, TestStatus.FAIL, TestStatus.ERROR, TestStatus.SKIP, TestStatus.TIMEOUT]
+            [
+                TestStatus.PASS,
+                TestStatus.FAIL,
+                TestStatus.ERROR,
+                TestStatus.SKIP,
+                TestStatus.TIMEOUT,
+            ]
         )
         assert suite.total == 5
         assert suite.passed == 1

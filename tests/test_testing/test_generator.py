@@ -6,7 +6,7 @@ from testing.models import FrameworkType, TestType
 
 class TestParseTestCases:
     def test_parses_python_block(self) -> None:
-        raw = '''
+        raw = """
 Here are the generated tests:
 
 ```python
@@ -17,7 +17,7 @@ Here are the generated tests:
 def test_login_returns_token():
     assert True
 ```
-'''
+"""
         cases = _parse_test_cases(raw, FrameworkType.PYTEST)
         assert len(cases) == 1
         assert cases[0].confidence.value == "high"
@@ -25,7 +25,7 @@ def test_login_returns_token():
         assert cases[0].diff_line_start == 42
 
     def test_parses_multiple_blocks(self) -> None:
-        raw = '''
+        raw = """
 ```python
 # tests/test_a.py
 def test_a(): pass
@@ -35,7 +35,7 @@ def test_a(): pass
 # tests/test_b.py
 def test_b(): pass
 ```
-'''
+"""
         cases = _parse_test_cases(raw, FrameworkType.PYTEST)
         assert len(cases) == 2
 
@@ -50,12 +50,12 @@ def test_b(): pass
         assert cases == []
 
     def test_typescript_block(self) -> None:
-        raw = '''
+        raw = """
 ```typescript
 // tests/auth.test.ts
 describe("auth", () => { it("works", () => {}); });
 ```
-'''
+"""
         cases = _parse_test_cases(raw, FrameworkType.JEST)
         assert len(cases) == 1
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
+from typing import Any
 
 from testing.models import TestResult, TestStatus, TestSuite
 
@@ -118,7 +119,7 @@ def format_results_markdown(suite: TestSuite) -> str:
     return "\n".join(lines)
 
 
-def format_results_json(suite: TestSuite) -> dict:
+def format_results_json(suite: TestSuite) -> dict[str, Any]:
     """Structured JSON output for CI/CD pipelines."""
     return {
         "suite_id": suite.id,
@@ -147,7 +148,7 @@ def format_results_json(suite: TestSuite) -> dict:
 # ---------------------------------------------------------------------------
 
 
-def _suite_to_dict(suite: TestSuite) -> dict:
+def _suite_to_dict(suite: TestSuite) -> dict[str, Any]:
     return {
         "id": suite.id,
         "pr_ref": suite.pr_ref,
@@ -173,7 +174,7 @@ def _suite_to_dict(suite: TestSuite) -> dict:
     }
 
 
-def _suite_from_dict(data: dict) -> TestSuite:
+def _suite_from_dict(data: dict[str, Any]) -> TestSuite:
     from datetime import datetime
 
     from testing.models import FrameworkType

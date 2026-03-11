@@ -5,9 +5,8 @@ from __future__ import annotations
 import re
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from typer.testing import CliRunner
-
 from runowl.cli import app
+from typer.testing import CliRunner
 
 runner = CliRunner()
 
@@ -197,8 +196,9 @@ class TestAskCommand:
 
 class TestOutputFormatting:
     def test_no_findings_message(self) -> None:
-        from review.models import ReviewResult
         from runowl.cli import _print_rich_review
+
+        from review.models import ReviewResult
 
         result = ReviewResult(findings=[], success=True)
         # Should not raise

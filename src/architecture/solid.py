@@ -2,10 +2,12 @@
 
 Stub in the public (free) distribution. Install ``runowl-paid`` to enable.
 """
+
 from __future__ import annotations
 
-from github.models import FileDiff
 from architecture.models import ArchReport
+
+from github.models import FileDiff
 
 
 def run_solid_scan(diffs: list[FileDiff]) -> ArchReport:  # noqa: ARG001

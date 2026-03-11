@@ -3,6 +3,7 @@
 This module is a stub in the public (free) distribution.
 Install the ``runowl-paid`` package to unlock deep OWASP analysis.
 """
+
 from __future__ import annotations
 
 from github.models import FileDiff

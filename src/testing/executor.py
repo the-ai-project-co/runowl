@@ -37,7 +37,9 @@ async def execute_suite(
 
     # --- Unit / integration ---
     if unit_cases:
-        logger.info("Running %d unit/integration tests (framework: %s)", len(unit_cases), suite.framework)
+        logger.info(
+            "Running %d unit/integration tests (framework: %s)", len(unit_cases), suite.framework
+        )
         unit_results = await run_unit_tests(unit_cases, suite.framework)
         suite.results.extend(unit_results)
 
