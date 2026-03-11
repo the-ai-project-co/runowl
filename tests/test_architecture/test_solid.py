@@ -1,8 +1,10 @@
 """Tests for SOLID / architecture checks (paid tier)."""
 
-from architecture.models import ArchCheckType
+import pytest
 
-from architecture.checks import (
+pytestmark = pytest.mark.skip(reason="Paid-tier implementation — tests live in runowl-paid")
+
+from architecture.checks import (  # noqa: E402
     check_deep_nesting,
     check_dependency_inversion,
     check_feature_envy,
@@ -12,8 +14,9 @@ from architecture.checks import (
     check_open_closed,
     check_single_responsibility,
 )
-from architecture.solid import run_solid_scan
-from github.models import DiffHunk, FileDiff
+from architecture.models import ArchCheckType  # noqa: E402
+from architecture.solid import run_solid_scan  # noqa: E402
+from github.models import DiffHunk, FileDiff  # noqa: E402
 
 
 def _diff(filename: str, added_lines: list[str], status: str = "added") -> FileDiff:

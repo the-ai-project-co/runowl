@@ -6,7 +6,6 @@ Stub in the public (free) distribution. Install ``runowl-paid`` to enable.
 from __future__ import annotations
 
 from architecture.models import ArchReport
-
 from github.models import FileDiff
 
 

@@ -1,7 +1,11 @@
 """Tests for deep security checks (paid tier)."""
 
-from github.models import DiffHunk, FileDiff
-from security.deep_checks import (
+import pytest
+
+pytestmark = pytest.mark.skip(reason="Paid-tier implementation — tests live in runowl-paid")
+
+from github.models import DiffHunk, FileDiff  # noqa: E402
+from security.deep_checks import (  # noqa: E402
     check_broken_access_control,
     check_cryptographic_failures,
     check_injection,
@@ -10,7 +14,7 @@ from security.deep_checks import (
     check_security_misconfiguration,
     check_supply_chain,
 )
-from security.deep_scanner import run_deep_scan
+from security.deep_scanner import run_deep_scan  # noqa: E402
 
 
 def _diff(filename: str, added_lines: list[str], status: str = "added") -> FileDiff:

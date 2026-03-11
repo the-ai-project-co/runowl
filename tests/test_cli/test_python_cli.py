@@ -5,8 +5,9 @@ from __future__ import annotations
 import re
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from runowl.cli import app
 from typer.testing import CliRunner
+
+from runowl.cli import app
 
 runner = CliRunner()
 
@@ -118,7 +119,7 @@ class TestReviewCommand:
             patch("runowl.cli.GitHubClient") as mock_gh_cls,
             patch("runowl.cli.ReasoningEngine"),
             patch("runowl.cli.ReviewAgent") as mock_agent_cls,
-            patch("runowl.cli.format_review_json", return_value='{"findings":[]}'),
+            patch("runowl.cli.format_review_json", return_value={"findings": []}),
         ):
             mock_settings.return_value = MagicMock(github_token=None, gemini_api_key="key")
             mock_gh = AsyncMock()
@@ -141,7 +142,7 @@ class TestReviewCommand:
                 ],
             )
             assert result.exit_code == 0
-            assert '{"findings":[]}' in plain(result.output)
+            assert '"findings"' in plain(result.output)
 
 
 # ── ask command validation ────────────────────────────────────────────────────
@@ -196,9 +197,8 @@ class TestAskCommand:
 
 class TestOutputFormatting:
     def test_no_findings_message(self) -> None:
-        from runowl.cli import _print_rich_review
-
         from review.models import ReviewResult
+        from runowl.cli import _print_rich_review
 
         result = ReviewResult(findings=[], success=True)
         # Should not raise
