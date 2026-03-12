@@ -135,6 +135,17 @@ def format_results_json(suite: TestSuite) -> dict[str, Any]:
                 "error_message": r.error_message,
                 "video_path": r.video_path,
                 "replay_path": r.replay_path,
+                "thumbnail_path": r.thumbnail_path,
+                "retry_count": r.retry_count,
+                "replay_events": [
+                    {
+                        "type": e.type,
+                        "offset_ms": e.offset_ms,
+                        "detail": e.detail,
+                        "linked_assertion_id": e.linked_assertion_id,
+                    }
+                    for e in r.replay_events
+                ],
             }
             for r in suite.results
         ],
@@ -167,6 +178,26 @@ def _suite_to_dict(suite: TestSuite) -> dict[str, Any]:
                 "video_path": r.video_path,
                 "replay_path": r.replay_path,
                 "screenshots": r.screenshots,
+                "thumbnail_path": r.thumbnail_path,
+                "retry_count": r.retry_count,
+                "video_timestamps": [
+                    {
+                        "step_name": ts.step_name,
+                        "offset_ms": ts.offset_ms,
+                        "screenshot_path": ts.screenshot_path,
+                    }
+                    for ts in r.video_timestamps
+                ],
+                "replay_events": [
+                    {
+                        "type": e.type,
+                        "offset_ms": e.offset_ms,
+                        "detail": e.detail,
+                        "linked_assertion_id": e.linked_assertion_id,
+                        "cluster_id": e.cluster_id,
+                    }
+                    for e in r.replay_events
+                ],
                 "executed_at": r.executed_at.isoformat(),
             }
             for r in suite.results
@@ -177,7 +208,7 @@ def _suite_to_dict(suite: TestSuite) -> dict[str, Any]:
 def _suite_from_dict(data: dict[str, Any]) -> TestSuite:
     from datetime import datetime
 
-    from testing.models import FrameworkType
+    from testing.models import FrameworkType, ReplayEvent, ReplayEventType, VideoTimestamp
 
     suite = TestSuite(
         id=data["id"],
@@ -187,6 +218,24 @@ def _suite_from_dict(data: dict[str, Any]) -> TestSuite:
         generation_error=data.get("generation_error"),
     )
     for r in data.get("results", []):
+        video_timestamps = [
+            VideoTimestamp(
+                step_name=ts["step_name"],
+                offset_ms=ts["offset_ms"],
+                screenshot_path=ts.get("screenshot_path"),
+            )
+            for ts in r.get("video_timestamps", [])
+        ]
+        replay_events = [
+            ReplayEvent(
+                type=ReplayEventType(e["type"]),
+                offset_ms=e["offset_ms"],
+                detail=e.get("detail", {}),
+                linked_assertion_id=e.get("linked_assertion_id"),
+                cluster_id=e.get("cluster_id"),
+            )
+            for e in r.get("replay_events", [])
+        ]
         suite.results.append(
             TestResult(
                 test_id=r["test_id"],
@@ -199,6 +248,10 @@ def _suite_from_dict(data: dict[str, Any]) -> TestSuite:
                 video_path=r.get("video_path"),
                 replay_path=r.get("replay_path"),
                 screenshots=r.get("screenshots", []),
+                thumbnail_path=r.get("thumbnail_path"),
+                retry_count=r.get("retry_count", 0),
+                video_timestamps=video_timestamps,
+                replay_events=replay_events,
                 executed_at=datetime.fromisoformat(r["executed_at"]),
             )
         )

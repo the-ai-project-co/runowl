@@ -33,6 +33,12 @@ export async function runReview(args: ParsedArgs): Promise<void> {
   if (args.model) {
     pyArgs.push("--model", args.model);
   }
+  if (args.test) {
+    pyArgs.push("--test");
+  }
+  if (args.testOnly) {
+    pyArgs.push("--test-only");
+  }
 
   const result = await runPython({
     command: "review",

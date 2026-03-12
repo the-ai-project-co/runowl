@@ -41,6 +41,13 @@ class Confidence(StrEnum):
     LOW = "low"
 
 
+class ReplayEventType(StrEnum):
+    DOM_ACTION = "dom_action"
+    NETWORK_REQUEST = "network_request"
+    CONSOLE_LOG = "console_log"
+    ASSERTION = "assertion"
+
+
 # ---------------------------------------------------------------------------
 # Generated test case (before execution)
 # ---------------------------------------------------------------------------
@@ -68,6 +75,38 @@ class TestCase:
 
 
 # ---------------------------------------------------------------------------
+# Video timestamp — links a video offset to a test step
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class VideoTimestamp:
+    """Links a specific offset in the recorded video to a named test step."""
+
+    step_name: str = ""
+    offset_ms: float = 0.0
+    screenshot_path: str | None = None
+
+
+# ---------------------------------------------------------------------------
+# Session replay event
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class ReplayEvent:
+    """A single captured event from a Playwright trace (DOM, network, console, assertion)."""
+
+    type: ReplayEventType = ReplayEventType.DOM_ACTION
+    offset_ms: float = 0.0
+    detail: dict[str, Any] = field(default_factory=dict)
+    # Set when this event is linked to a failing test assertion
+    linked_assertion_id: str | None = None
+    # Cluster ID assigned by build_timeline (events within 100ms window)
+    cluster_id: int | None = None
+
+
+# ---------------------------------------------------------------------------
 # Execution result for a single test case
 # ---------------------------------------------------------------------------
 
@@ -85,10 +124,18 @@ class TestResult:
     error_message: str = ""
     # Path to recorded video clip (if E2E)
     video_path: str | None = None
-    # Path to session replay JSON (if E2E)
+    # Path to session replay / trace zip (if E2E)
     replay_path: str | None = None
     # Screenshot paths (on failure)
     screenshots: list[str] = field(default_factory=list)
+    # Thumbnail of the first frame of the video (if E2E + ffmpeg available)
+    thumbnail_path: str | None = None
+    # Video timestamps linked to test steps
+    video_timestamps: list[VideoTimestamp] = field(default_factory=list)
+    # Structured replay events parsed from the Playwright trace
+    replay_events: list[ReplayEvent] = field(default_factory=list)
+    # How many times this test was retried (0 = first attempt succeeded/failed)
+    retry_count: int = 0
     executed_at: datetime = field(default_factory=datetime.utcnow)
 
     @property
