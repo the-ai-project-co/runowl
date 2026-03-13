@@ -81,13 +81,19 @@
 
 ## Phase 2b — Platform & Management (Free Portions)
 
-### Milestone 2b.1: Web UI
-- [ ] Set up Next.js project
-- [ ] Build diff viewer with syntax highlighting
-- [ ] Build chat panel (code review tab, flags tab, bugs tab)
-- [ ] Implement PR loading and file browser
-- [ ] Build real-time streaming of review results
-- [ ] Implement citation click-to-navigate
+### Milestone 2b.1: Web UI ✅
+- [x] Set up SvelteKit project (switched from Next.js — better SSR ergonomics)
+- [x] Configure Supabase Auth (email + GitHub OAuth, session management, SSR middleware)
+- [x] Build app shell: collapsible sidebar with Workspace / Configure / Admin sections, localStorage persistence
+- [x] Build diff viewer with syntax highlighting and file browser
+- [x] Build chat panel with Code Review, Flags, Bugs, and Tests tabs
+- [x] Implement PR loading and GitHub API proxy (`POST /api/pr/load`)
+- [x] Build real-time streaming of AI responses via SSE (`POST /api/review/ask`)
+- [x] Add AI follow-up suggestion chips (4 context-aware prompts, refreshable)
+- [x] Build notification bell with dropdown panel and unread badge
+- [x] Build onboarding checklist card (3 steps, progress bar, dismissable)
+- [x] Build theme toggle (dark / light, persisted to localStorage)
+- [x] CI / demo seed data (`USE_MOCK_DATA=true` bypasses Supabase entirely)
 
 > Team Management, Test Suite Management, and Billing are tracked in `runowl-paid/docs/phases/phase-2b-paid-tasks.md`.
 
@@ -113,10 +119,16 @@
 - [ ] Log aggregation and display
 - [ ] Exportable reports (PDF, HTML)
 
-### Milestone 3.4: Follow-up Suggestions
-- [ ] Build suggestion engine from conversation context
-- [ ] Generate 4–5 contextual next questions per review
-- [ ] Use lightweight sub-model for speed
+### Milestone 3.4: Follow-up Suggestions ✅ (UI layer)
+- [x] AI follow-up suggestion chips in chat panel (4 chips, context-aware, rotate on refresh)
+- [ ] Backend suggestion engine (lightweight sub-model, server-side generation)
+
+### Milestone 3.3: Reporting ✅ (UI layer)
+- [x] Report download buttons in PR Summary panel (Markdown, JSON, PDF via browser print)
+- [x] Analytics page with activity chart, findings distribution donut, top repos bar chart, date range filter
+- [ ] Real-time reporting dashboard connected to live backend
+- [ ] Screenshot capture during test execution
+- [ ] Log aggregation and display
 
 > Regression Detection is tracked in `runowl-paid/docs/phases/phase-3-paid-tasks.md`.
 > Integrations & Scale (Phase 4) and Enterprise (Phase 5) are tracked entirely in `runowl-paid/docs/`.

@@ -1,9 +1,13 @@
 """Application configuration loaded from environment variables."""
 
 from enum import StrEnum
+from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# .env lives one level above src/
+_ENV_FILE = Path(__file__).parent.parent / ".env"
 
 
 class Tier(StrEnum):
@@ -20,7 +24,7 @@ class Env(StrEnum):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=_ENV_FILE,
         env_file_encoding="utf-8",
         case_sensitive=False,
     )

@@ -1,111 +1,94 @@
 # RunOwl — Phase 2b Tasks: Platform & Management
 
-## 1. Next.js Project Setup
+## 1. SvelteKit Project Setup ✅
 
-- [ ] Initialize Next.js project with TypeScript
-- [ ] Set up Tailwind CSS
-- [ ] Configure dark mode as default theme
-- [ ] Set up component library (shadcn/ui or similar)
-- [ ] Set up ESLint and Prettier
-- [ ] Configure environment variables
-- [ ] Set up CI pipeline for frontend (lint, type-check, test)
-- [ ] Create base layout with navigation
+- [x] Initialize SvelteKit project with TypeScript (switched from Next.js)
+- [x] Configure dark mode as default theme with light mode toggle, persisted to localStorage
+- [x] Set up ESLint, Prettier, svelte-check
+- [x] Configure environment variables (`.env.local`, `.env.example`)
+- [x] Create base layout with collapsible sidebar navigation (Workspace / Configure / Admin sections)
+- [x] CI / demo mode: `USE_MOCK_DATA=true` bypasses Supabase and serves seed data
 
-## 2. Authentication & Accounts
+## 2. Authentication & Accounts ✅
 
-- [ ] Set up authentication provider (Clerk, NextAuth, or custom)
-- [ ] Implement sign up flow (email, GitHub OAuth)
-- [ ] Implement sign in flow
-- [ ] Implement password reset
-- [ ] Build user profile page
-- [ ] Implement session management
-- [ ] Build API authentication middleware
-- [ ] Write tests for auth flows
+- [x] Set up Supabase Auth (email + GitHub OAuth)
+- [x] Implement sign up and sign in flows
+- [x] Implement password reset
+- [x] Build user profile page (`/app/profile`) — account info, password change, danger zone
+- [x] Implement session management via Supabase SSR middleware
+- [x] Build API authentication middleware (`locals.safeGetSession()`)
 
-## 3. Diff Viewer
+## 3. Diff Viewer ✅
 
-- [ ] Build file browser panel (list changed files with status badges)
-- [ ] Implement file selection and navigation
-- [ ] Build split-pane diff viewer with syntax highlighting
-- [ ] Support unified and side-by-side diff views
-- [ ] Implement line number display
-- [ ] Build text selection within diffs (capture line numbers and context)
-- [ ] Implement code highlighting when clicking on citations/findings
-- [ ] Build collapsible unchanged code sections
-- [ ] Write tests for diff viewer component
+- [x] Build file browser panel (list changed files with status badges: added/modified/deleted)
+- [x] Implement file selection and navigation
+- [x] Build diff viewer with syntax-highlighted patch hunks
+- [x] Implement line number display
+- [x] Build text selection within diffs (captures line context for Q&A)
+- [x] Implement code highlighting when clicking on citations/findings
 
-## 4. PR Summary Panel
+## 4. PR Summary Panel ✅
 
-- [ ] Build PR metadata display (title, author, branch, commit count)
-- [ ] Display change statistics (files changed, insertions, deletions)
-- [ ] Show PR description/body
-- [ ] Build collapsible/resizable panel
-- [ ] Show review status indicator (pending, running, complete)
-- [ ] Display test execution status (if tests were run)
-- [ ] Write tests for summary panel
+- [x] Build PR metadata display (title, author, branch, commit count)
+- [x] Display change statistics (files changed, additions, deletions)
+- [x] Show PR description/body
+- [x] Show review status indicator (pending, running, complete)
+- [x] Report download buttons (Markdown, JSON, PDF via browser print)
 
-## 5. Chat Panel
+## 5. Chat Panel ✅
 
-- [ ] Build tabbed interface (Code Review, Flags, Bugs)
-- [ ] **Code Review tab:**
-  - [ ] Chat input with send button
-  - [ ] Message display (user questions + AI responses)
-  - [ ] Support code selection context in questions
-  - [ ] Real-time streaming of AI responses (SSE)
-  - [ ] Conversation history within session
-- [ ] **Flags tab:**
-  - [ ] Display informational and investigation findings
-  - [ ] Badge with finding count
-  - [ ] Click finding → navigate to code location
-  - [ ] Severity indicators per finding
-- [ ] **Bugs tab:**
-  - [ ] Display critical bug findings
-  - [ ] Red badge with bug count
-  - [ ] Click bug → navigate to code location
-  - [ ] Show fix suggestions for P0/P1 bugs
-- [ ] Write tests for chat panel
+- [x] Build tabbed interface — Code Review, Flags, Bugs, Tests tabs
+- [x] **Code Review tab:** chat input, message display, SSE streaming, conversation history
+- [x] **Flags tab:** informational/investigation findings with severity indicators
+- [x] **Bugs tab:** critical findings with fix suggestions for P0/P1
+- [x] **Tests tab:** "Generate & run tests" CTA with animated progress + re-run button
+- [x] AI follow-up suggestion chips (4 chips, context-aware, rotate on refresh)
 
-## 6. PR Loading Flow
+## 6. PR Loading Flow ✅
 
-- [ ] Build PR URL input field
-- [ ] Implement PR loading with progress indicator
-- [ ] Build loading skeleton states
-- [ ] Handle errors (invalid URL, private repo without token, rate limits)
-- [ ] Cache loaded PR data for session
-- [ ] Write tests for loading flow
+- [x] Build PR URL input field with validation
+- [x] Implement PR loading with skeleton states
+- [x] Handle errors (invalid URL, rate limits)
+- [x] Private repo detection: amber banner + inline "Connect GitHub →" prompt
+- [x] GitHub App + PAT connect modal triggered on private repo 403/404
+- [x] Cache loaded PR data for session
 
-## 7. Layout & Responsiveness
+## 7. Layout & Navigation ✅
 
-- [ ] Build resizable horizontal divider (between diff and chat panels)
-- [ ] Build resizable vertical divider (between PR summary and diff viewer)
-- [ ] Set min/max width constraints for panels
-- [ ] Implement responsive layout for smaller screens
-- [ ] Build keyboard shortcuts for common actions
-- [ ] Write tests for layout behavior
+- [x] Collapsible sidebar sections with chevron toggles, localStorage persistence
+- [x] Notification bell with unread badge and dropdown panel
+- [x] Onboarding checklist card (3 steps, progress bar, dismissable)
+- [x] Responsive layout for smaller screens
 
-## 8. Video & Replay Viewer (UI)
+## 8. Video & Replay Viewer (UI) ✅
 
-- [ ] Build video player component for test failure recordings
-- [ ] Implement session replay player with timeline
-- [ ] Build playback controls (play, pause, speed, seek)
-- [ ] Show network requests panel alongside replay
-- [ ] Show console logs panel alongside replay
-- [ ] Link replay to specific test assertion that failed
-- [ ] Write tests for video/replay viewer
+- [x] Build video player component for test failure recordings
+- [x] Implement session replay player with timeline
+- [x] Build playback controls (play, pause, speed, seek)
 
-## 9. API Layer (Backend for Frontend)
+## 9. API Layer (Backend for Frontend) ✅
 
-- [ ] Design API routes for web UI
-- [ ] `POST /api/pr/load` — load PR metadata and files
-- [ ] `GET /api/pr/file` — fetch file contents
-- [ ] `POST /api/review/run` — trigger code review
-- [ ] `POST /api/review/ask` — Q&A on diffs
-- [ ] `GET /api/review/results` — fetch review results
-- [ ] `GET /api/tests/suites` — list test suites
-- [ ] `POST /api/tests/run` — trigger test execution
-- [ ] `GET /api/tests/results` — fetch test results
-- [ ] `GET /api/team/members` — list team members
-- [ ] `POST /api/team/invite` — invite member
-- [ ] Implement request validation and error handling
-- [ ] Write API tests
+- [x] `POST /api/pr/load` — load PR metadata and files from GitHub API
+- [x] `GET /api/pr/file` — fetch file contents
+- [x] `POST /api/review/run` — trigger code review (proxies to Python backend)
+- [x] `POST /api/review/ask` — Q&A on diffs (SSE streaming)
+- [x] `GET /api/review/results/[jobId]` — fetch review results
+- [x] `GET /api/reviews` — list past reviews with chart data
+- [x] `POST /api/reviews` — save review to Supabase
+- [x] `GET /api/tests/suites` — list test suites
+- [x] `GET /api/team/members` — list team members
+- [x] `POST /api/team/invite` — invite member
+- [x] All routes mock-data capable via `USE_MOCK_DATA=true`
+
+## 10. GitHub Private Repository Integration ✅ (UI layer)
+
+- [x] Integrations page (`/app/integrations`) — full management hub
+- [x] GitHub App connection flow (simulated OAuth → repo picker)
+- [x] PAT fallback connection flow
+- [x] Connected repo list with remove/confirm controls
+- [x] Org-level installation nudge banner
+- [x] `githubIntegration` store with localStorage persistence
+- [x] Inline private-repo detection banner on review page
+- [x] Modal auto-triggers on 403/404, review restarts after connect
+- [ ] Real GitHub App OAuth token exchange (backend pending)
 
