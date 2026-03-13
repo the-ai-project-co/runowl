@@ -76,6 +76,8 @@
 - [x] `GET /api/reviews` — list past reviews with chart data
 - [x] `POST /api/reviews` — save review to Supabase
 - [x] `GET /api/tests/suites` — list test suites
+- [x] `POST /api/tests/run` — trigger test generation + execution (proxies to Python backend)
+- [x] `GET /api/tests/results?suite_id=` — fetch test suite results (mock data + real proxy)
 - [x] `GET /api/team/members` — list team members
 - [x] `POST /api/team/invite` — invite member
 - [x] All routes mock-data capable via `USE_MOCK_DATA=true`
