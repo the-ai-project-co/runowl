@@ -67,6 +67,12 @@ target-version = ["py312"]
 asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "unit: Pure unit tests — no I/O, no mocked APIs",
+    "integration: Integration tests — mocked HTTP/API calls, ASGI transport",
+    "e2e: End-to-end tests — real API calls, full pipeline",
+    "evals: AI evaluation tests — quality, accuracy, precision/recall of AI features",
+]
 
 [tool.mypy]
 python_version = "3.12"
