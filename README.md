@@ -222,6 +222,18 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=the-ai-project-co%2Frunowl&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=the-ai-project-co/runowl&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=the-ai-project-co/runowl&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=the-ai-project-co/runowl&type=date&legend=top-left" />
+ </picture>
+</a>
+
+---
+
 ## License
 
 MIT
